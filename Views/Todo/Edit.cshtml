@@ -1,0 +1,35 @@
+﻿@*
+
+*@
+@{
+}
+
+<h2>To-do Item</h2>
+
+@if (!string.IsNullOrEmpty(ViewBag.Error))
+{
+    <p style="color:red">@ViewBag.Error</p>
+
+}
+
+<form asp-action="UpdateItem" method="post">
+    <input type="hidden" name="index" value="@ViewBag.Index" />
+    <input type="text" name="UpdateItem" value="@Model.Text" />
+    <select name="updatedPriority">
+        @foreach (var priority in new[] { "High", "Medium", "Low" })
+        {
+            if (Model.Priority == priority)
+            {
+                <option value="@priority" selected="selected">@priority</option>
+            }
+            else
+            {
+                <option value="@priority">@priority</option>
+            }
+        }
+    </select>
+    
+    <button type="submit">Updatera</button>
+</form>
+
+<a asp-action="Index">Tillbaka till listan</a>
